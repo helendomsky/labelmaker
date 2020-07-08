@@ -6,16 +6,16 @@
    	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
    	<script src="jspdf-master/dist/jspdf.min.js"></script>
   	<script src="labelmkr_fn.js"></script>
-  	<link rel="stylesheet" type="text/css" href="">
+  	<link rel="stylesheet" type="text/css" href="labelmkr_style.css">
 
   </head>
 
-  <body>
+  <body id="body">
   	<style></style>
 
   	<meta charset="utf-8">
   	<title id="ignorePDF">Label Maker 1.0</title>
-    <form id="ignorePDF" name="label_form" method="post" action="#" class="container">
+    <form id="ignorePDF" name="label_form" method="post" action="#">
     	
       <div class="header">~Label Maker 1.0~</div>
 
@@ -24,17 +24,24 @@
       <div id="all_inputs">
         
         <div id="installation">
-
           <label for="inst_opts">Choose Installation:</label>
-          <select id="inst_opts"></select>
-
+          <select id="inst_opts" autofocus></select>
         </div>
 
         <div id="sites">
           <label for="num_sites">Total Sites:</label>
-          <input id="num_sites" type="number" min="1">       
+          <input id="num_sites" type="number" min="1" value="1">       
         </div>
 
+        <div id="date_1">
+          <label for="date_rec">Date of Receipt:</label>
+          <input id="date_rec" type="date" value="Day__Month__Year__">
+        </div>
+
+        <div id="date_2">
+          <label for="date_emg">Date of Emergence:</label>
+          <input id="date_emg" type="date" value="Day__Month__Year__">         
+        </div>
 
 
 
@@ -47,10 +54,7 @@
     </form>
 
   <div id="EXPORT_CONTENTS">
-    <p>jkvk jjh</p>
-    <div>"nbhjvhjm"</div>
-    <div id="newtag">APG, Site 6</div>
-    <div id="newtag">APG, Site 1</div><div id="newtag">APG, Site 2</div><div id="newtag">APG, Site 3</div><div id="newtag">APG, Site 4</div><div id="newtag">APG, Site 5</div><div id="newtag">APG, Site 6</div>
+
   </div>
 
 

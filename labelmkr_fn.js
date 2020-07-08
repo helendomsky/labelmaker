@@ -1,14 +1,13 @@
 $(function() {
 
   var exp = $("#EXPORT_CONTENTS");
-  var inst_list = ["APG","Fort Belvoir","Fort Bliss","Fort Collins"]
-
-
+  var inst_list = ["Aberdeen Proving Grounds","Fort Belvoir","Fort Bliss","Rocky Mountain Arsenal"]
+  var city_state = ["Aberdeen, MD","Fairfax, VA","El Paso, TX","Commerce City, CO"]
   //exp.hide();
-  popDrop("#inst_opts",inst_list);
+  popDrop("#inst_opts",inst_list,city_state);
 
 
-  popTag("#pop_button","#inst_opts","#num_sites","#EXPORT_CONTENTS");
+  popTag("#pop_button","#inst_opts","#num_sites","#date_rec","#date_emg","#EXPORT_CONTENTS");
   triggerExportPDF("#exp_button");
 
 
@@ -20,6 +19,8 @@ $(function() {
   function triggerExportPDF(buttonTag){
     var bt = $(buttonTag);
 
+    bt.on("click",function() {
+
 
     var doc = new jsPDF();          
     var elementHandler = {
@@ -28,6 +29,8 @@ $(function() {
       }
     };
     var source = window.document.getElementsByTagName("body")[0];
+
+
     doc.fromHTML(
       source,
       15,
@@ -36,16 +39,17 @@ $(function() {
         'width': 180,'elementHandlers': elementHandler
       });
 
-    bt.on("click",function() {
+
       doc.output("dataurlnewwindow");
+      doc.save("tags.pdf");
     });
   };
 
-  function popDrop(menu, items){
+  function popDrop(menu, items, attribute){
     var dd = $(menu)
 
     for(var i =0; i<= items.length-1; i++){
-      dd.append($("<option/>", { id: "it" + i, value: items[i],text: items[i]}))
+      dd.append($("<option/>", { id: "it" + i, value: attribute[i],text: items[i]}))
     };
 
     
@@ -57,16 +61,32 @@ $(function() {
     });
   };
 
-  function popTag(populateButton,installation,sites,tagLoc){
+  function popTag(populateButton,installation,sites,dateReceived,dateEmerged,tagLoc){
     var bt = $(populateButton);
-    var tg = $(tagLoc);
+    var tgset = $(tagLoc);
 
     bt.on("click",function() {
       var inst = $(installation);
       var stnum = $(sites);
+      var dr = $(dateReceived);
+      var de = $(dateEmerged);
+
+
 
       for(var i = 1; i <= stnum.val(); i++){
-        tg.append($("<div/>",{ id: "newtag", text: inst.val()+", Site "+i}))
+        tgset.append($("<div/>",{ id: "tag_"+i, class: "test"}));
+        var tg = $("#tag_"+i)
+
+        tg.append($("<div/>",{ id: "rec", text: "Date Received:"+dr.val()}));
+        tg.append($("<div/>",{ id: "emg", text: "Date Emerged:"+de.val()}));
+        tg.append($("<div/>",{ id: "newtag", text: inst.find("option:selected").text()+", Site "+i}));
+        tg.append($("<div/>",{ id: "citystate", text: inst.val()+", USA"}));
+        tg.append($("<div/>",{ id: "inspc", text: "INITIAL BELOW:"}));        
+        tg.append($("<div/>",{ id: "inspc", text: "Pan Start: ____ Cage Start: ____"}));
+        tg.append($("<br>"));
+
+        //could add a "remove button" beside each, that will change CSS class
+        //and make the ID "ignorePDF"
       };
 
     });

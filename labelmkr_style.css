@@ -18,4 +18,11 @@
   border-bottom: 1px dotted;
 }
 
+.test {
+  border: 2px dotted;
+  border-color: lightgrey;
+  border-radius: 20px;
+  padding: 5px;
 
+  color: blue;
+}
