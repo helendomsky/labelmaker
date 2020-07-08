@@ -1,13 +1,14 @@
 $(function() {
 
   var exp = $("#EXPORT_CONTENTS");
+  var genus_list = ["Aedes","Culex","Culiseta","Psorophora"]
   var inst_list = ["Aberdeen Proving Grounds","Fort Belvoir","Fort Bliss","Rocky Mountain Arsenal"]
   var city_state = ["Aberdeen, MD","Fairfax, VA","El Paso, TX","Commerce City, CO"]
   //exp.hide();
   popDrop("#inst_opts",inst_list,city_state);
+  popDrop("#genus_opts",genus_list,genus_list)
 
-
-  popTag("#pop_button","#inst_opts","#num_sites","#date_rec","#date_emg","#EXPORT_CONTENTS");
+  popTag("#pop_button","#inst_opts","#genus_opts","#num_sites","#date_rec","#date_emg","#EXPORT_CONTENTS");
   triggerExportPDF("#exp_button");
 
 
@@ -61,13 +62,14 @@ $(function() {
     });
   };
 
-  function popTag(populateButton,installation,sites,dateReceived,dateEmerged,tagLoc){
+  function popTag(populateButton,installation,genus,sites,dateReceived,dateEmerged,tagLoc){
     var bt = $(populateButton);
     var tgset = $(tagLoc);
 
     bt.on("click",function() {
       var inst = $(installation);
       var stnum = $(sites);
+      var gn = $(genus)
       var dr = $(dateReceived);
       var de = $(dateEmerged);
 
@@ -77,11 +79,12 @@ $(function() {
         tgset.append($("<div/>",{ id: "tag_"+i, class: "test"}));
         var tg = $("#tag_"+i)
 
-        tg.append($("<div/>",{ id: "rec", text: "Date Received:"+dr.val()}));
-        tg.append($("<div/>",{ id: "emg", text: "Date Emerged:"+de.val()}));
+        tg.append($("<div/>",{ id: "gen", text: "Genus: "+gn.find("option:selected").val()}));
+        tg.append($("<div/>",{ id: "rec", text: "Date Received: "+dr.val()}));
+        tg.append($("<div/>",{ id: "emg", text: "Date Emerged: "+de.val()}));
         tg.append($("<div/>",{ id: "newtag", text: inst.find("option:selected").text()+", Site "+i}));
         tg.append($("<div/>",{ id: "citystate", text: inst.val()+", USA"}));
-        tg.append($("<div/>",{ id: "inspc", text: "INITIAL BELOW:"}));        
+        tg.append($("<div/>",{ id: "inspc", text: "--INITIAL BELOW--"}));        
         tg.append($("<div/>",{ id: "inspc", text: "Pan Start: ____ Cage Start: ____"}));
         tg.append($("<br>"));
 

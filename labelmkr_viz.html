@@ -5,6 +5,7 @@
   	
    	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
    	<script src="jspdf-master/dist/jspdf.min.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
   	<script src="labelmkr_fn.js"></script>
   	<link rel="stylesheet" type="text/css" href="labelmkr_style.css">
 
@@ -31,6 +32,11 @@
         <div id="sites">
           <label for="num_sites">Total Sites:</label>
           <input id="num_sites" type="number" min="1" value="1">       
+        </div>
+
+        <div id="genus">
+          <label for="genus_opts">Choose Genus:</label>
+          <select id="genus_opts"></select>
         </div>
 
         <div id="date_1">
